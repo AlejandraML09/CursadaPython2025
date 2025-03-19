@@ -29,8 +29,7 @@ score = 0
 # Zip une los elementos de las 3 listas (las preguntas, respuestas y las respuestas correctas) en tuplas.
 # List convierte el resultado de zip en una lista completa para poder ser utilizada por random.choices
 # Random.choices selecciona 3 elementos de esa lista generada de manera aleatoria.
-questions_to_ask = random.choices(list(zip(questions, answers, correct_answers_index)), k=3)
-print(questions_to_ask)
+questions_to_ask = random.sample(list(zip(questions, answers, correct_answers_index)), k=3)
 # Separamos la lista de tuplas para quedarnos sólo con las preguntas, respuestas y respuestas correctas por separado.
 for question, answers, correct_answer_index in questions_to_ask:
     print(question)
