@@ -24,17 +24,18 @@ answers = [
 ]
 # Índice de la respuesta correcta para cada pregunta, el el mismo orden que las preguntas
 correct_answers_index = [1, 2, 0, 3, 1]
-puntaje = 0
+score = 0
 # El usuario deberá contestar 3 preguntas
-for _ in range(3):
-    # Se selecciona una pregunta aleatoria
-    question_index = random.randint(0, len(questions) - 1)
-
-    # Se muestra la pregunta y las respuestas posibles
-    print(questions[question_index])
-    for i, answer in enumerate(answers[question_index]):
+# Zip une los elementos de las 3 listas (las preguntas, respuestas y las respuestas correctas) en tuplas.
+# List convierte el resultado de zip en una lista completa para poder ser utilizada por random.choices
+# Random.choices selecciona 3 elementos de esa lista generada de manera aleatoria.
+questions_to_ask = random.choices(list(zip(questions, answers, correct_answers_index)), k=3)
+print(questions_to_ask)
+# Separamos la lista de tuplas para quedarnos sólo con las preguntas, respuestas y respuestas correctas por separado.
+for question, answers, correct_answer_index in questions_to_ask:
+    print(question)
+    for i, answer in enumerate(answers):
         print(f"{i + 1}. {answer}")
-
     # El usuario tiene 2 intentos para responder correctamente
     for intento in range(2):
         try:
@@ -42,22 +43,21 @@ for _ in range(3):
         except:
             print("Respuesta inválida, ingresá un número")
             sys.exit(1)
-        # Se verifica si la respuesta es correcta
-        if user_answer > len(answers[question_index]) or user_answer < 0:
+    # Se verifica si la respuesta es correcta
+        if user_answer+1 > len(answers) or user_answer < 0:
             print("Respuesta inválida, ingresá un número válido")
             sys.exit(1)
-        if user_answer == correct_answers_index[question_index]:
-            puntaje += 1
+        if user_answer == correct_answer_index:
+            score += 1
             print("¡Correcto!")
             break
         else:
-            puntaje -= 0.5
+            score -= 0.5
     else:
         # Si el usuario no responde correctamente después de 2 intentos,
         # se muestra la respuesta correcta
         print("Incorrecto. La respuesta correcta es:")
-        print(answers[question_index][correct_answers_index[question_index]])
-
+        print(f"{correct_answer_index+1}. {answers[correct_answer_index]}")
     # Se imprime un blanco al final de la pregunta
     print()
-print(f"El puntaje obtenido es de: {puntaje} puntos")
+print(f"El puntaje obtenido es de: {score} puntos")
