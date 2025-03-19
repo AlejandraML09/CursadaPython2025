@@ -31,22 +31,23 @@ score = 0
 # Random.choices selecciona 3 elementos de esa lista generada de manera aleatoria.
 questions_to_ask = random.sample(list(zip(questions, answers, correct_answers_index)), k=3)
 # Separamos la lista de tuplas para quedarnos sólo con las preguntas, respuestas y respuestas correctas por separado.
-for question, answers, correct_answer_index in questions_to_ask:
+for question, answers, correct_answer_i in questions_to_ask:
     print(question)
     for i, answer in enumerate(answers):
         print(f"{i + 1}. {answer}")
     # El usuario tiene 2 intentos para responder correctamente
     for intento in range(2):
-        try:
-            user_answer = int(input("Respuesta: ")) - 1
-        except:
+        # Verificamos primero si se trata de un número. Para eso el input no puede ser un int. (Podríamos usar try y catch?)
+        user_answer_str = input("Respuesta: ") 
+        if not(user_answer_str.isdigit()):      
             print("Respuesta inválida, ingresá un número")
             sys.exit(1)
-    # Se verifica si la respuesta es correcta
+    # Se verifica si la respuesta es correcta - La convertimos en int primero.
+        user_answer = int(user_answer_str) - 1 
         if user_answer+1 > len(answers) or user_answer < 0:
             print("Respuesta inválida, ingresá un número válido")
             sys.exit(1)
-        if user_answer == correct_answer_index:
+        if user_answer == correct_answer_i:
             score += 1
             print("¡Correcto!")
             break
@@ -56,7 +57,7 @@ for question, answers, correct_answer_index in questions_to_ask:
         # Si el usuario no responde correctamente después de 2 intentos,
         # se muestra la respuesta correcta
         print("Incorrecto. La respuesta correcta es:")
-        print(f"{correct_answer_index+1}. {answers[correct_answer_index]}")
+        print(f"{correct_answer_i+1}. {answers[correct_answer_i]}")
     # Se imprime un blanco al final de la pregunta
     print()
 print(f"El puntaje obtenido es de: {score} puntos")
