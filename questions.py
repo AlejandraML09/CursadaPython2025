@@ -43,12 +43,15 @@ for _ in range(3):
             print("Respuesta inválida, ingresá un número")
             sys.exit(1)
         # Se verifica si la respuesta es correcta
-        if user_answer > len(answers[question_index]) or user_answer < 1:
+        if user_answer > len(answers[question_index]) or user_answer < 0:
             print("Respuesta inválida, ingresá un número válido")
             sys.exit(1)
         if user_answer == correct_answers_index[question_index]:
+            puntaje += 1
             print("¡Correcto!")
             break
+        else:
+            puntaje -= 0.5
     else:
         # Si el usuario no responde correctamente después de 2 intentos,
         # se muestra la respuesta correcta
@@ -57,3 +60,4 @@ for _ in range(3):
 
     # Se imprime un blanco al final de la pregunta
     print()
+print(f"El puntaje obtenido es de: {puntaje} puntos")
