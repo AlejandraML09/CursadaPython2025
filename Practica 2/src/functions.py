@@ -7,13 +7,13 @@ def points_gained(kills, deaths, assists):
     return points
 
 def print_player(player, kills, assists, deaths, mvp, points):
-    print(player,kills, assists, deaths,mvp,points)
+    print(f"{player:<10} {kills:<8} {assists:<12} {deaths:<8} {mvp:<6} {points:<8}")
 
 def print_separator():
-    print("------------------")
+    print("-" * 60)
 
 def print_header():
-    print(f"Jugador Kills Asistencias Muertes MVPs Puntos")
+    print(f"{'Jugador':<10} {'Kills':<8} {'Asistencias':<12} {'Muertes':<8} {'MVPs':<6} {'Puntos':<8}")
     print_separator()
 
 def print_round(round):
