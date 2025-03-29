@@ -47,7 +47,8 @@ def update_player_stats(player_stats, k,d,a, points):
 
 def print_table(result_round):
     print_header()
-    for player, stats in result_round.items():
+    sorted_table = (sorted(result_round.items(), key=lambda p:p[1]['points'], reverse=True))
+    for player, stats in sorted_table:
         print_player(
             player, 
             stats['kills'], 
