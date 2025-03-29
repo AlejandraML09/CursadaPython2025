@@ -28,7 +28,7 @@ def process_round(round, player_stats):
     player_mvp = ""
     result_round = {}
     for player, kda in round.items():
-        k,d,a = (kda["kills"], kda["assists"], kda["deaths"])
+        k,d,a = (kda["kills"], kda["deaths"], kda["assists"])
         points = points_gained(k,d,a) 
         if (max_points < points):
             max_points = points 
